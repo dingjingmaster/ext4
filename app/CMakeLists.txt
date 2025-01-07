@@ -2,12 +2,29 @@ file(GLOB EXT4_SRC
         ${CMAKE_SOURCE_DIR}/app/defines.h
 
         ${CMAKE_SOURCE_DIR}/app/ops/op-init.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-link.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-open.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-read.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-write.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-rmdir.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-mkdir.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-mknod.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-chmod.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-flush.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-fsync.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-access.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-create.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-statfs.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-unlink.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-rename.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-release.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-destroy.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-symlink.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-utimens.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-truncate.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-getxattr.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-read-dir.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-fget-attr.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-read-link.c
 )
 
