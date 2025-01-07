@@ -8,6 +8,7 @@
 #define ext4_GLOBAL_H
 #include <fuse.h>
 #include <errno.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <ext2fs/ext2fs.h>
@@ -20,8 +21,8 @@ C_BEGIN_EXTERN_C
 #error " Compilation requires at least FUSE version 2.6.0! "
 #endif
 
-#ifndef EXT_PATH_MAX
-#define EXT_PATH_MAX                        4096
+#ifndef PATH_MAX
+#define PATH_MAX                            4096
 #endif
 #define EXT_FLUSH_BITMAPS_TIMEOUT           10
 #define EXT_FILE_SHARED_INODE               0x8000
@@ -37,7 +38,7 @@ struct _ExtFsData
     bool                force;
     bool                readonly;
     cuint64             lastFlush;
-    cchar*              mntPoint;
+    cuchar*             mntPoint;
     cchar*              options;
     cchar*              device;
     cchar*              volName;
@@ -85,11 +86,13 @@ static inline void extfs_write_gid (struct ext2_inode* inode, gid_t gid)
 void*       extfs_op_init                       (struct fuse_conn_info* conn);
 void        extfs_op_destroy                    (void* userData);
 cint32      extfs_op_access                     (const char* path, int mask);
+cint32      extfs_op_getattr                    (const char* path, struct stat* statBuf);
 cint32      extfs_op_fgetattr                   (const char* path, struct stat* statBuf, struct fuse_file_info* fi);
+cint32      extfs_op_getxattr                   (const char* path, const char* name, char* value, cuint64 size);
 cint32      extfs_op_open                       (const char* path, struct fuse_file_info* fi);
-cint32      extfs_op_read                       (const char* path, char* buf, cint32 size, cuint64 offset, struct fuse_file_info* fi);
-cint32      extfs_op_read_dir                   (const char* path, char* buf, fuse_fill_dir_t filler, cuint64 offset, struct fuse_file_info* fi);
-cint32      extfs_op_read_link                  (const char* path, char* buf, cint32 size);
+cint32      extfs_op_read                       (const char* path, char* buf, cuint64 size, cint64 offset, struct fuse_file_info* fi);
+cint32      extfs_op_read_dir                   (const char* path, void* buf, fuse_fill_dir_t filler, cint64 offset, struct fuse_file_info* fi);
+cint32      extfs_op_read_link                  (const char* path, char* buf, cuint64 size);
 cint32      extfs_op_release                    (const char* path, struct fuse_file_info* fi);
 cint32      extfs_op_statfs                     (const char* path, struct statvfs* buf);
 cint32      extfs_op_chmod                      (const char* path, mode_t mode);
@@ -101,13 +104,13 @@ cint32      extfs_op_mkdir                      (const char* path, mode_t mode);
 cint32      extfs_op_rmdir                      (const char* path);
 cint32      extfs_op_unlink                     (const char* path);
 cint32      extfs_op_utimens                    (const char* path, const struct timespec tv[2]);
-cint64      extfs_op_write                      (const char* path, const char* buf, cuint64 size, cuint64 offset, struct fuse_file_info* fi);
+cint32      extfs_op_write                      (const char* path, const char* buf, cuint64 size, cint64 offset, struct fuse_file_info* fi);
 cint32      extfs_op_mknod                      (const char* path, mode_t mode, dev_t dev);
 cint32      extfs_op_symlink                    (const char* srcName, const char* dstName);
 cint32      extfs_op_link                       (const char* srcPath, const char* dstPath);
 cint32      extfs_op_rename                     (const char* srcPath, const char* dstPath);
-cint32      extfs_op_truncate                   (const char* path, cuint64 len);
-cint32      extfs_op_ftruncate                  (const char* path, cuint64 len, struct fuse_file_info* fi);
+cint32      extfs_op_truncate                   (const char* path, cint64 len);
+cint32      extfs_op_ftruncate                  (const char* path, cint64 len, struct fuse_file_info* fi);
 
 cint32      extfs_do_probe                      (ExtFsData* opts);
 cint32      extfs_do_label                      (void);
