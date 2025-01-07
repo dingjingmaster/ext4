@@ -1,5 +1,14 @@
 file(GLOB EXT4_SRC
         ${CMAKE_SOURCE_DIR}/app/defines.h
+
+        ${CMAKE_SOURCE_DIR}/app/ops/op-init.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-rmdir.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-mkdir.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-mknod.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-unlink.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-rename.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-symlink.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-read-link.c
 )
 
 add_executable(ext4 main.c ${EXT4_SRC})
