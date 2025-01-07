@@ -12,7 +12,7 @@ static int parse_name(const char *name, int *nameIndex, char **attrName);
 static int do_getxattr(ext2_filsys e2fs, struct ext2_inode *node, const char *name, char *value, size_t size);
 
 
-int extfs_op_getxattr(const char *path, const char *name, char *value, cuint64 size)
+cint32 extfs_op_getxattr(const char *path, const char *name, char *value, cuint64 size)
 {
     int rt = 0;
     ext2_ino_t ino = 0;
@@ -36,6 +36,7 @@ int extfs_op_getxattr(const char *path, const char *name, char *value, cuint64 s
 
     return rt;
 }
+
 
 static int parse_name(const char *name, int *nameIndex, char **attrName)
 {

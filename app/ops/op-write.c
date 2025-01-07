@@ -18,7 +18,7 @@ int extfs_op_write (const char *path, const char *buf, cuint64 size, cint64 offs
 }
 
 
-size_t do_write (ext2_file_t file, const char *buf, cuint64 size, cint64 offset)
+cint64 extfs_do_write (ext2_file_t file, const char* buf, cuint64 size, cuint64 offset)
 {
     int rt = 0;
     const char* tmp = NULL;

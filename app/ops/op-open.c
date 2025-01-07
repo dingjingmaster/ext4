@@ -18,7 +18,7 @@ int extfs_op_open (const char* path, struct fuse_file_info* fi)
     return 0;
 }
 
-ext2_file_t do_open (ext2_filsys e2fs, const char *path, int flags)
+ext2_file_t extfs_do_open (ext2_filsys e2fs, const char* path, int flags)
 {
     int rt = 0;
     errcode_t rc = 0;

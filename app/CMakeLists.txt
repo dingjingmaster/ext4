@@ -17,6 +17,7 @@ file(GLOB EXT4_SRC
         ${CMAKE_SOURCE_DIR}/app/ops/op-statfs.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-unlink.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-rename.c
+        ${CMAKE_SOURCE_DIR}/app/ops/op-getattr.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-release.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-destroy.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-symlink.c
@@ -26,6 +27,13 @@ file(GLOB EXT4_SRC
         ${CMAKE_SOURCE_DIR}/app/ops/op-read-dir.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-fget-attr.c
         ${CMAKE_SOURCE_DIR}/app/ops/op-read-link.c
+
+        ${CMAKE_SOURCE_DIR}/app/ops/do-check.c
+        ${CMAKE_SOURCE_DIR}/app/ops/do-probe.c
+        ${CMAKE_SOURCE_DIR}/app/ops/do-read-inode.c
+        ${CMAKE_SOURCE_DIR}/app/ops/do-write-inode.c
+        ${CMAKE_SOURCE_DIR}/app/ops/do-fill-stat-buf.c
+        ${CMAKE_SOURCE_DIR}/app/ops/do-kill-file-by-inode.c
 )
 
 add_executable(ext4 main.c ${EXT4_SRC})
