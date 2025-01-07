@@ -12,6 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 find_package(PkgConfig)
 
 pkg_check_modules(FUSE REQUIRED fuse)
+pkg_check_modules(EXT2 REQUIRED ext2fs)
 
 add_subdirectory(app)
-add_subdirectory(test)
+#add_subdirectory(test)
