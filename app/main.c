@@ -31,9 +31,8 @@ static const char* gsUsageMsg =
 "Usage:     %s <device|image_file> <mount_point> [-o option[,...]]\n"
 "\n"
 "Example: ./ext4 /dev/sda1 /mnt\n"
-"\n"
 "%s\n"
-"\n";
+"";
 
 static const struct fuse_operations gsExtfsOps = {
     .getattr                = extfs_op_getattr,
@@ -214,6 +213,24 @@ static int parse_options (int argc, char* argv[], ExtFsData* opts)
                 printf("Unknown option '%s'\n", argv[optind - 1]);
                 return -1;
             }
+        }
+    }
+
+    if (optind < argc) {
+        optarg = argv[optind++];
+        if (optarg[0] != '/') {
+            char fullDevice[PATH_MAX + 1] = {0};
+            if (!realpath(optarg, fullDevice)) {
+                printf("Cannot mount %s\n", optarg);
+                C_FREE(opts->device);
+                return -1;
+            }
+            else {
+                opts->device = strdup(fullDevice);
+            }
+        }
+        else {
+            opts->device = strdup(optarg);
         }
     }
 
